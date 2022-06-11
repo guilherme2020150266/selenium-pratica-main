@@ -54,23 +54,10 @@ public class AulaSistemaTest {
   }
 
 
-  @Test
-  public void redirecionamentoParaTwitterTest(){
-    Actions actions = new Actions(webDriver);
-    webDriver.get("https://www.diariodepernambuco.com.br/");
-    WebElement botaoTwitter = webDriver.findElement(By.xpath("/html/body/div[3]/div[1]/div[2]/div/div[2]/div/span[5]/a/img"));
-  //  actions.moveToElement(botaoTwitter).perform();
-    botaoTwitter.click();
-    Assertions.assertEquals("https://twitter.com/DiarioPE", webDriver.getCurrentUrl());
-
-  }
-
 
   @Test
   public void buscaFormularioTest(){
-   // System.setProperty("webdriver.chrome.driver","C:\\Users\\Guilherme\\Desktop\\testes\\selenium-pratica-main\\src\\test\\resourcers\\chromedriver_win32\\chromedriver.exe");
-    //WebDriver webDriver = new ChromeDriver();
-  //  webDriver.manage().window().maximize();
+
     Actions actions = new Actions(webDriver);
     webDriver.get("https://www.globo.com/");
     WebElement buscaSection = webDriver.findElement(By.id("header-search-section"));
@@ -80,25 +67,10 @@ public class AulaSistemaTest {
     busca.sendKeys("fantastico");
     busca.submit();
     Assertions.assertTrue(webDriver.getCurrentUrl().contains("fantastico"));
-    //webDriver.close();
+
   }
 
-  @Test
-  public void buscaFormulario1Test(){
-    // System.setProperty("webdriver.chrome.driver","C:\\Users\\Guilherme\\Desktop\\testes\\selenium-pratica-main\\src\\test\\resourcers\\chromedriver_win32\\chromedriver.exe");
-    //WebDriver webDriver = new ChromeDriver();
-    //  webDriver.manage().window().maximize();
-    Actions actions = new Actions(webDriver);
-    webDriver.get("https://www.youtube.com/");
-    WebElement buscaSection = webDriver.findElement(By.id("header-search-section"));
-    actions.moveToElement(buscaSection).click().perform();
-    Assertions.assertTrue(buscaSection.isEnabled());
-    WebElement busca = webDriver.findElement(By.id("search-icon-legacy"));
-    busca.sendKeys("fantastico");
-    busca.submit();
-    Assertions.assertTrue(webDriver.getCurrentUrl().contains("fantastico"));
-    //webDriver.close();
-  }
+
   @Test
   public void tooltipTest(){
     webDriver.get("https://www.diariodepernambuco.com.br/");
@@ -117,10 +89,41 @@ public class AulaSistemaTest {
     chk2 = webDriver.findElement(By.xpath("//input[@name='option2']"));
     Assertions.assertFalse(chk2.isSelected()); {
       System.out.print("\n"+chk1.isSelected());
-
     }
 
+   }
+
+  @Test
+  public void moveMouseEClicaTest(){
+    webDriver.get("https://www.casasbahia.com.br/");
+    Actions actions = new Actions(webDriver);
+    WebElement botaoEntrarCarrinho = webDriver.findElement(By.id("itensCarrinho"));
+    actions.moveToElement(botaoEntrarCarrinho).build().perform();
+    botaoEntrarCarrinho.click();
+    Assertions.assertEquals("https://carrinho.casasbahia.com.br/", webDriver.getCurrentUrl());
+    }
+
+  @Test
+  public void abrePaginaJc(){
+
+    webDriver.get("https://gas.sjcc.dev/login");
+    Assertions.assertEquals("https://gas.sjcc.dev/login", webDriver.getCurrentUrl());
+
   }
+
+  @Test
+  public void loginOnJcPage()  {
+    webDriver.get("https://gas.sjcc.dev/login/");
+    WebElement buscaEmail = webDriver.findElement(By.id("email"));
+    buscaEmail.sendKeys("teste@gmail.com");
+    WebElement botaoEntrar = webDriver.findElement(By.xpath("/html/body/div/div/div/div/div[2]/form/div[3]/button"));
+    botaoEntrar.click();
+    Assertions.assertEquals("https://gas.sjcc.dev/login/",webDriver.getCurrentUrl());
+  }
+
+
+
+}
  /* @Test
   public void abrirPagina1Test (){
     {...}
@@ -162,4 +165,4 @@ public class AulaSistemaTest {
   }
 */
 
-}
+
